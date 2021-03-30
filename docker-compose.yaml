@@ -1,0 +1,15 @@
+version: "3"
+services:
+  database:
+    container_name: "szpordb"
+    image: postgres
+    environment:
+      POSTGRES_USER: "user"
+      POSTGRES_PASSWORD: "example"
+      POSTGRES_DB: "szpordb"
+    volumes:
+      - postgres:/szpordb
+    ports:
+      - "5432:5432"
+volumes:
+  postgres:
