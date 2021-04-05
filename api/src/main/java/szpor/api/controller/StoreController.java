@@ -38,8 +38,9 @@ public class StoreController {
     }
 
     @RequestMapping(value = "/save" , method = RequestMethod.POST,consumes = "application/json")
-    public ResponseEntity<?> saveStore(@RequestBody Store store){
+    public ResponseEntity<?> saveStore(@RequestBody Store storeBody){
 
+        Store store = new Store(storeBody.getStoreName());
         String error = storeService.saveStore(store);
 
         if(error == null){

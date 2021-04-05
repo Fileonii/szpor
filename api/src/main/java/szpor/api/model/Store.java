@@ -1,6 +1,8 @@
 package szpor.api.model;
 
 
+import szpor.api.utils.Utils;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -12,18 +14,20 @@ public class Store implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long storeId;
 
-
     private String storeName;
 
-    public Store() { }//JPA constructor
+    private String storeHash;
+
+    public Store() {
+    }
 
     public Store(String storeName) {
 
         this.storeName = storeName;
+        this.storeHash = Utils.endoceString(10, storeName);
     }
 
     public Long getStoreId() {
@@ -40,5 +44,13 @@ public class Store implements Serializable {
 
     public void setStoreName(String storeName) {
         this.storeName = storeName;
+    }
+
+    public String getStoreHash() {
+        return storeHash;
+    }
+
+    public void setStoreHash(String storeHash) {
+        this.storeHash = storeHash;
     }
 }
