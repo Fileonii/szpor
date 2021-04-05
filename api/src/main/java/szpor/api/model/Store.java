@@ -5,6 +5,7 @@ import szpor.api.utils.Utils;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "Store")
@@ -20,6 +21,9 @@ public class Store implements Serializable {
     private String storeName;
 
     private String storeHash;
+
+//    @OneToMany
+//    private List<Address> addressStore;
 
     public Store() {
     }

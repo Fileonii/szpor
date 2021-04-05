@@ -2,26 +2,26 @@ package szpor.api.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import szpor.api.repository.StoreRepository;
+import szpor.api.model.Address;
 import szpor.api.model.Store;
+import szpor.api.repository.AddressRepository;
+import szpor.api.repository.StoreRepository;
 
 import java.util.Optional;
 
 @Service
-public class StoreService {
-
+public class AddressService {
     @Autowired
-    private StoreRepository storeRepository;
+    private AddressRepository addressRepository;
 
-    public Optional<Store> getStoreById(long id) {
+    public Optional<Address> getAddressById(long id) {
         return Optional.empty();
     }
 
-    public String saveStore(Store store) {
+    public String saveAddress(Address address) {
 
         try {
-            Store zmienna = storeRepository.saveAndFlush(store);
-            System.out.println(zmienna.getStoreId());
+            addressRepository.saveAndFlush(address);
         } catch (Exception e) {
             return e.getMessage();
         }
