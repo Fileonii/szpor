@@ -13,7 +13,7 @@ import Vue from "vue";
 import { storeEntity } from "../helpers/interfaces/formInterfaces";
 import { keys } from "ts-transformer-keys";
 import CompForm from "./CompForm.vue";
-import { formUtils } from "../helpers/interfaces/formEnum";
+import { formUtils } from "../helpers/interfaces/formInterfaces";
 const address: addressEntity = {
   addressCountry: "Pologne",
 };

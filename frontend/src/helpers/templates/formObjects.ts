@@ -1,4 +1,4 @@
-import { formUtils } from "../interfaces/formEnum";
+import { formUtils } from "../interfaces/formInterfaces";
 import { addressEntity, storeEntity } from "../interfaces/formInterfaces";
 
 export class formObjects {
