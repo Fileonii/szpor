@@ -1,34 +1,34 @@
 import { formEnum } from "../interfaces/formInterfaces";
 
 export const formElements = {
-  forms: [
-    {
-      type: `${formEnum.STORE_FORM}`,
-      name: "Nowy Sklep",
-      controls: [
-        {
-          type: "TEXT",
-          caption: "Nazwa Sklepu",
-          key: "str_1",
-        },
-        {
-          type: "TEXT",
-          caption: "NIP",
-          key: "str_2",
-        },
-      ],
-    },
+  [formEnum.STORE_FORM]: {
+    type: [formEnum.STORE_FORM],
+    name: "Nowy Sklep",
+    controls: [
+      {
+        type: "TEXT",
+        caption: "Nazwa Sklepu",
+        ref: "str_1",
+        dbColumn: 'storeName',
+      },
+      {
+        type: "TEXT",
+        caption: "NIP",
+        ref: "str_2",
+        dbColumn: 'nip',
+      },
+    ],
+  },
 
-    {
-      type: `${formEnum.ADDRESS_FORM}`,
-      name: "Formularz Adresowy",
-      controls: [
-        {
-          type: "TEXT",
-          caption: "Kraj",
-          key: "add_1",
-        },
-      ],
-    },
-  ],
+  [formEnum.ADDRESS_FORM]: {
+    type: [formEnum.STORE_FORM],
+    name: "Formularz Adresowy",
+    controls: [
+      {
+        type: "TEXT",
+        caption: "Kraj",
+        key: "add_1",
+      },
+    ],
+  },
 };

@@ -1,59 +1,62 @@
 <template>
-  <!-- <div v-if="formType === 1">
-    <button v-on:click="count++">New Address</button>
-  </div>
-  <div v-else-if="formType === 2">
-    <button>New Store</button>
-  </div> -->
+
   <div>
-    <div class="pa-md-4 mx-lg-auto" v-for="form in formItems" :key="form.name">
-      <div v-if="getFormType === form.type">
-        <div v-for="control in form.controls" :key="control.key">
-          <v-text-field
+    <div class="pa-md-4 mx-lg-auto">
+      <div v-for="control in getFormElement.controls" :key="control.key">
+        <v-text-field
+            :ref="control.ref"
             :label="control.caption"
-            :rules="rules"
-            hide-details="auto"
-          ></v-text-field>
-        </div>
+        ></v-text-field>
       </div>
     </div>
+    <v-btn @click="saveStore">Dodaj Sklep</v-btn>
   </div>
+
 </template>
 
 <script lang="ts">
 import Vue from "vue";
-import { formEnum } from "../helpers/interfaces/formInterfaces";
-import { formElements } from "../helpers/templates/formElements";
+import {formEnum} from "../helpers/interfaces/formInterfaces";
+import {formElements} from "../helpers/templates/formElements";
 import Vuetify from "vuetify/lib";
-const formItems = formElements.forms;
+
 export default Vue.component("comp-form", {
-  data: function() {
+  data: function () {
     return {
       formUtils: formEnum,
-      formItems: formItems,
+      formElements: formElements,
     };
   },
 
-  template: "",
 
   computed: {
     getFormType() {
-      console.log();
       const getterVuex: formEnum = this.$store.getters.getFormType;
       return getterVuex;
     },
+
+    getFormElement(){
+      return this.formElements[this.getFormType];
+    }
   },
 
   methods: {
-    createForm() {
-      for (let i: number = 0; i < formItems.length; i++) {
-        console.log(formItems[i].name);
-        if (formItems[i].type === this.getFormType) {
-          console.log("Mam formularz");
-          console.log(formItems[i]);
-        }
-      }
-    },
+    saveStore(){
+      this.$nextTick(() => {
+        const variable = this.$refs['str_1'];
+        //console.log(variable);
+      });
+
+    }
+    // createForm() {
+    //   for (let i: number = 0; i < formItems.length; i++) {
+    //     console.log(formItems[i].name);
+    //     if (formItems[i].type === this.getFormType) {
+    //       console.log("Mam formularz");
+    //       console.log(formItems[i]);
+    //     }
+    //   }
+    // },
   },
 });
 </script>
