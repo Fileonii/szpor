@@ -2,8 +2,14 @@
   <div class="hello">
     <h1>{{ msg }}</h1>
     <comp-form />
-    <button @click="chooseFormType(formUtils.ADDRESS_FORM)">Dodaj Adres</button>
-    <button @click="chooseFormType(formUtils.STORE_FORM)">Dodaj Sklep</button>
+    <v-btn
+      depressed
+      color="primary"
+      @click="chooseFormType(formUtils.ADDRESS_FORM)"
+    >
+      Dodaj Adres
+    </v-btn>
+    <v-btn @click="chooseFormType(formUtils.STORE_FORM)">Dodaj Sklep</v-btn>
   </div>
 </template>
 
@@ -13,7 +19,7 @@ import Vue from "vue";
 import { storeEntity } from "../helpers/interfaces/formInterfaces";
 import { keys } from "ts-transformer-keys";
 import CompForm from "./CompForm.vue";
-import { formUtils } from "../helpers/interfaces/formInterfaces";
+import { formEnum } from "../helpers/interfaces/formInterfaces";
 const address: addressEntity = {
   addressCountry: "Pologne",
 };
@@ -32,11 +38,11 @@ export default Vue.extend({
   },
   data: function() {
     return {
-      formUtils: formUtils,
+      formUtils: formEnum,
     };
   },
   methods: {
-    chooseFormType(choose: formUtils) {
+    chooseFormType(choose: formEnum) {
       console.log(choose);
       //dispatch odnosi sie do akcji
       this.$store.dispatch("actionFormType", choose);

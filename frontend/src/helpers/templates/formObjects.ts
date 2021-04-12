@@ -1,10 +1,10 @@
-import { formUtils } from "../interfaces/formInterfaces";
+import { formEnum } from "../interfaces/formInterfaces";
 import { addressEntity, storeEntity } from "../interfaces/formInterfaces";
 
 export class formObjects {
-  public static formTemplates(choose: formUtils) {
+  public static formTemplates(choose: formEnum) {
     switch (choose) {
-      case formUtils.ADDRESS_FORM: {
+      case formEnum.ADDRESS_FORM: {
         const storeInterface: storeEntity = {
           storeName: "",
           storeAddress: {
@@ -15,7 +15,7 @@ export class formObjects {
         return storeInterface;
       }
 
-      case formUtils.STORE_FORM: {
+      case formEnum.STORE_FORM: {
         const addressInterface: addressEntity = {
           addressCountry: "",
         };

@@ -6,34 +6,30 @@
     <button>New Store</button>
   </div> -->
   <div>
-    <div v-for="form in formItems" :key="form.name">
+    <div class="pa-md-4 mx-lg-auto" v-for="form in formItems" :key="form.name">
       <div v-if="getFormType === form.type">
-        {{ getFormType }}
-        <v-text-field
-          label="Main input"
-          :rules="rules"
-          hide-details="auto"
-        ></v-text-field>
+        <div v-for="control in form.controls" :key="control.key">
+          <v-text-field
+            :label="control.caption"
+            :rules="rules"
+            hide-details="auto"
+          ></v-text-field>
+        </div>
       </div>
     </div>
-
-    <!-- <div v-if="getFormType === formUtils.STORE_FORM">
-      {{ getFormType }}
-    </div> -->
-    <button @click="createForm" />
   </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
-import { formUtils } from "../helpers/interfaces/formInterfaces";
+import { formEnum } from "../helpers/interfaces/formInterfaces";
 import { formElements } from "../helpers/templates/formElements";
-
+import Vuetify from "vuetify/lib";
 const formItems = formElements.forms;
 export default Vue.component("comp-form", {
   data: function() {
     return {
-      formUtils: formUtils,
+      formUtils: formEnum,
       formItems: formItems,
     };
   },
@@ -43,39 +39,20 @@ export default Vue.component("comp-form", {
   computed: {
     getFormType() {
       console.log();
-      const getterVuex: formUtils = this.$store.getters.getFormType;
+      const getterVuex: formEnum = this.$store.getters.getFormType;
       return getterVuex;
     },
   },
 
   methods: {
     createForm() {
-      const formTypeVuex = this.getFormType;
-      const formTemplate = formElements.forms;
-
-      for (let i: number = 0; i < formTemplate.length; i++) {
-        console.log(formTemplate[i].name);
-        if (formTemplate[i].type === formTypeVuex) {
+      for (let i: number = 0; i < formItems.length; i++) {
+        console.log(formItems[i].name);
+        if (formItems[i].type === this.getFormType) {
           console.log("Mam formularz");
-          console.log(formTemplate[i]);
+          console.log(formItems[i]);
         }
       }
-
-      // switch (formTypes) {
-      //   case formUtils.ADDRESS_FORM: {
-      //     console.log(formTemplate);
-      //     break;
-      //   }
-
-      //   case formUtils.STORE_FORM: {
-      //     console.log("STORE! w case");
-      //     break;
-      //   }
-      //   default: {
-      //     //statements;
-      //     break;
-      //   }
-      // }
     },
   },
 });

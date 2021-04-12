@@ -14,7 +14,7 @@ export interface storeEntity {
   storeAddress: addressEntity;
   storeNIP: number;
 }
-export enum formUtils {
+export enum formEnum {
   ADDRESS_FORM = "ADDRESS_FORM",
   STORE_FORM = "STORE_FORM",
 }

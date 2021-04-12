@@ -1,9 +1,9 @@
-import { formUtils } from "../interfaces/formInterfaces";
+import { formEnum } from "../interfaces/formInterfaces";
 
 export const formElements = {
   forms: [
     {
-      type: `${formUtils.STORE_FORM}`,
+      type: `${formEnum.STORE_FORM}`,
       name: "Nowy Sklep",
       controls: [
         {
@@ -20,7 +20,7 @@ export const formElements = {
     },
 
     {
-      type: `${formUtils.ADDRESS_FORM}`,
+      type: `${formEnum.ADDRESS_FORM}`,
       name: "Formularz Adresowy",
       controls: [
         {
