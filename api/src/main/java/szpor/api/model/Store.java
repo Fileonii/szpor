@@ -22,16 +22,22 @@ public class Store implements Serializable {
 
     private String storeHash;
 
+    private Integer NIP;
+
 //    @OneToMany
 //    private List<Address> addressStore;
 
     public Store() {
     }
 
-    public Store(String storeName) {
-
-        this.storeName = storeName;
-        this.storeHash = Utils.endoceString(10, storeName);
+//    public Store(String storeName, Integer nip) {
+//
+//        this.NIP = nip;
+//        this.storeName = storeName;
+//        this.storeHash = Utils.endoceString(10, storeName);
+//    }
+    public void generateStoreHash(){
+        this.storeHash = Utils.endoceString(10, this.storeName);
     }
 
     public Long getStoreId() {
@@ -56,5 +62,13 @@ public class Store implements Serializable {
 
     public void setStoreHash(String storeHash) {
         this.storeHash = storeHash;
+    }
+
+    public Integer getNIP() {
+        return NIP;
+    }
+
+    public void setNIP(Integer NIP) {
+        this.NIP = NIP;
     }
 }
