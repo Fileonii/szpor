@@ -6,6 +6,7 @@
         <v-text-field
             :ref="control.ref"
             :label="control.caption"
+            :value="123"
         ></v-text-field>
       </div>
     </div>
@@ -14,37 +15,52 @@
 
 </template>
 
+
 <script lang="ts">
+
+
+
 import Vue from "vue";
 import {formEnum} from "../helpers/interfaces/formInterfaces";
 import {formElements} from "../helpers/templates/formElements";
 import Vuetify from "vuetify/lib";
 
 export default Vue.component("comp-form", {
-  data: function () {
+  data(): any {
     return {
-      formUtils: formEnum,
+      formEnum: formEnum,
       formElements: formElements,
     };
   },
 
 
   computed: {
-    getFormType() {
-      const getterVuex: formEnum = this.$store.getters.getFormType;
-      return getterVuex;
+    getFormType(): any{
+      return this.$store.getters.getFormType;
     },
 
-    getFormElement(){
-      return this.formElements[this.getFormType];
+    getFormElement(): any{
+      return formElements[this.getFormType] || {};
     }
   },
 
   methods: {
     saveStore(){
       this.$nextTick(() => {
-        const variable = this.$refs['str_1'];
-        //console.log(variable);
+
+        const formElementsControls = this.getFormElement.controls;
+
+        let saveData: {[k: string]: any} = {};
+
+        formElementsControls.map((control: any) => {
+          const value = this.$refs[control.ref][0].value;
+          const dbColumn = control.dbColumn;
+
+          saveData[dbColumn] = value;
+        })
+
+        console.log(saveData);
+
       });
 
     }

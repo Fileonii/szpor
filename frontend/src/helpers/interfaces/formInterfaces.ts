@@ -15,7 +15,7 @@ export interface storeEntity {
   storeNIP: number;
 }
 
-export enum formEnum {
-  ADDRESS_FORM = "ADDRESS_FORM",
-  STORE_FORM = "STORE_FORM",
+export const formEnum = {
+  ADDRESS_FORM: "ADDRESS_FORM",
+  STORE_FORM: "STORE_FORM",
 }

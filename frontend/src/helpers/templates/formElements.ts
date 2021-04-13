@@ -27,7 +27,8 @@ export const formElements = {
       {
         type: "TEXT",
         caption: "Kraj",
-        key: "add_1",
+        ref: "str_1",
+        dbColumn: 'country'
       },
     ],
   },
