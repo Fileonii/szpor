@@ -45,12 +45,14 @@ public class StoreController {
 
     @RequestMapping(value = "/save" , method = RequestMethod.POST,consumes = "application/json")
     public ResponseEntity<?> saveStore(@RequestBody Address addressBody){
-        String storeName = addressBody.getStore().getStoreName();
+        Store store = addressBody.getStore();
+        Integer nip = store.getNIP();
+        store.generateStoreHash();
 
-        Store store = new Store(storeName);
+//        Boolean storeExistsByNIP = storeRepository.existsByNIP(nip);
+//        System.out.println(storeExistsByNIP);
         storeService.saveStore(store);
 
-        addressBody.setStore(store);
 
 //        Store store = new Store(storeBody.getStoreName());
         String error = addressService.saveAddress(addressBody);

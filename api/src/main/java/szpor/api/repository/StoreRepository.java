@@ -12,4 +12,6 @@ public interface StoreRepository extends JpaRepository<Store, Long> {
 
     List<Store> findAll();
     Store findById(long id);
+
+    boolean existsByNIP(Integer nip);
 }

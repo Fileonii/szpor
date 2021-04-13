@@ -18,12 +18,22 @@ public class StoreService {
     }
 
     public String saveStore(Store store) {
+        Integer nip = store.getNIP();
+        if (nip != null) {
+            Boolean storeExistsByNIP = storeRepository.existsByNIP(nip);
+            System.out.println(storeExistsByNIP);
+            if(storeExistsByNIP == false) {
 
-        try {
-            Store zmienna = storeRepository.saveAndFlush(store);
-            System.out.println(zmienna.getStoreId());
-        } catch (Exception e) {
-            return e.getMessage();
+                try {
+                    Store zmienna = storeRepository.saveAndFlush(store);
+                } catch (Exception e) {
+
+                    System.out.println(e.getMessage());
+                    return e.getMessage();
+                }
+            }else{
+                System.out.println("Nie weszlo");
+            }
         }
 
         return null;
