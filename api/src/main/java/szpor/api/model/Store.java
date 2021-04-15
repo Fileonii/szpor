@@ -2,8 +2,9 @@ package szpor.api.model;
 
 
 import szpor.api.utils.Utils;
-
+//import javax.validation.constraints.NotNull;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.List;
 
@@ -22,6 +23,7 @@ public class Store implements Serializable {
 
     private String storeHash;
 
+    @NotNull(message = "brak nipu")
     private Integer NIP;
 
 //    @OneToMany

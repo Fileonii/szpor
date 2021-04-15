@@ -11,6 +11,8 @@ import szpor.api.model.Store;
 import szpor.api.service.AddressService;
 import szpor.api.service.StoreService;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping(value = "/api/store")
 public class StoreController {
@@ -44,23 +46,25 @@ public class StoreController {
     }
 
     @RequestMapping(value = "/save" , method = RequestMethod.POST,consumes = "application/json")
-    public ResponseEntity<?> saveStore(@RequestBody Address addressBody){
+    public ResponseEntity<?> saveStore(@Valid @RequestBody Address addressBody){
         Store store = addressBody.getStore();
         Integer nip = store.getNIP();
         store.generateStoreHash();
 
 //        Boolean storeExistsByNIP = storeRepository.existsByNIP(nip);
 //        System.out.println(storeExistsByNIP);
-        storeService.saveStore(store);
-
+        String errorStore = storeService.saveStore(store);
+        if(errorStore == null){
+            String error = addressService.saveAddress(addressBody);
+            if(error == null){
+                return new ResponseEntity<Address> (addressBody, HttpStatus.OK);
+            }else{
+                return new ResponseEntity<String> (error, HttpStatus.BAD_REQUEST);
+            }
+        }else{
+            return new ResponseEntity<String> (errorStore, HttpStatus.BAD_REQUEST);
+        }
 
 //        Store store = new Store(storeBody.getStoreName());
-        String error = addressService.saveAddress(addressBody);
-
-        if(error == null){
-            return new ResponseEntity<Address> (addressBody, HttpStatus.OK);
-        }else{
-            return new ResponseEntity<String> (error, HttpStatus.BAD_REQUEST);
-        }
     }
 }
