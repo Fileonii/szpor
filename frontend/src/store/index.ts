@@ -13,7 +13,6 @@ export default new Vuex.Store({
   mutations: {
     setFormType: (state, payloads) => {
       state.formType = payloads;
-      console.log(`${payloads} mutacja`);
     },
   },
 

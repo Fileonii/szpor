@@ -1,28 +1,22 @@
 <template>
-
   <div>
     <div class="pa-md-4 mx-lg-auto">
       <div v-for="control in getFormElement.controls" :key="control.key">
         <v-text-field
-            :ref="control.ref"
-            :label="control.caption"
-            :value="123"
+          :ref="control.ref"
+          :label="control.caption"
         ></v-text-field>
       </div>
     </div>
-    <v-btn @click="saveStore">Dodaj Sklep</v-btn>
+    <v-btn @click="saveStore">ZAPISZ</v-btn>
   </div>
-
 </template>
 
-
 <script lang="ts">
-
-
-
 import Vue from "vue";
-import {formEnum} from "../helpers/interfaces/formInterfaces";
-import {formElements} from "../helpers/templates/formElements";
+import { formEnum } from "../helpers/interfaces/formInterfaces";
+import { formElements } from "../helpers/templates/formElements";
+import { BackendConnector } from "../helpers/connectors/backendConnector";
 import Vuetify from "vuetify/lib";
 
 export default Vue.component("comp-form", {
@@ -33,46 +27,37 @@ export default Vue.component("comp-form", {
     };
   },
 
-
   computed: {
-    getFormType(): any{
+    getFormType(): any {
       return this.$store.getters.getFormType;
     },
 
-    getFormElement(): any{
+    getFormElement(): any {
       return formElements[this.getFormType] || {};
-    }
+    },
   },
 
   methods: {
-    saveStore(){
+    saveStore() {
       this.$nextTick(() => {
+        const formElements = this.getFormElement;
+        const formElementsControls = formElements.controls;
 
-        const formElementsControls = this.getFormElement.controls;
-
-        let saveData: {[k: string]: any} = {};
+        let saveData: { [key: string]: any } = {};
 
         formElementsControls.map((control: any) => {
-          const value = this.$refs[control.ref][0].value;
+          console.log(control.ref);
+          console.log(this.$refs[control.ref][0]);
+          const value = this.$refs[control.ref][0].lazyValue;
           const dbColumn = control.dbColumn;
-
+          console.log(value);
           saveData[dbColumn] = value;
-        })
-
+        });
+        console.log(this.getFormElement);
+        BackendConnector.postFormByType(formElements.type, saveData);
         console.log(saveData);
-
       });
-
-    }
-    // createForm() {
-    //   for (let i: number = 0; i < formItems.length; i++) {
-    //     console.log(formItems[i].name);
-    //     if (formItems[i].type === this.getFormType) {
-    //       console.log("Mam formularz");
-    //       console.log(formItems[i]);
-    //     }
-    //   }
-    // },
+    },
   },
 });
 </script>

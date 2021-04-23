@@ -18,4 +18,5 @@ export interface storeEntity {
 export const formEnum = {
   ADDRESS_FORM: "ADDRESS_FORM",
   STORE_FORM: "STORE_FORM",
-}
+  NOWY_FORMULARZ: "DUPA_FORM",
+};

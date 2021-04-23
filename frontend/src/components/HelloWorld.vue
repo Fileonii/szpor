@@ -10,6 +10,9 @@
       Dodaj Adres
     </v-btn>
     <v-btn @click="chooseFormType(formEnum.STORE_FORM)">Dodaj Sklep</v-btn>
+    <v-btn color="error" @click="chooseFormType(formEnum.NOWY_FORMULARZ)"
+      >Formularz Dupy</v-btn
+    >
   </div>
 </template>
 
@@ -19,16 +22,6 @@ import Vue from "vue";
 import { storeEntity } from "../helpers/interfaces/formInterfaces";
 import CompForm from "./CompForm.vue";
 import { formEnum } from "../helpers/interfaces/formInterfaces";
-
-const address: addressEntity = {
-  addressCountry: "Pologne",
-};
-
-const shop: storeEntity = {
-  storeName: "xd",
-  storeAddress: address,
-  storeNIP: 12,
-};
 
 export default Vue.extend({
   components: { CompForm },
