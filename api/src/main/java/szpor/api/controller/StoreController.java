@@ -42,7 +42,7 @@ public class StoreController {
 
         return new ResponseEntity<Store> (store, HttpStatus.OK);
     }
-
+    @CrossOrigin(origins = "http://localhost:8080")
     @RequestMapping(value = "/save" , method = RequestMethod.POST,consumes = "application/json")
     public ResponseEntity<?> saveStore(@RequestBody Address addressBody){
         Store store = addressBody.getStore();
