@@ -1,45 +1,44 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-pwa" target="_blank" rel="noopener">pwa</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-router" target="_blank" rel="noopener">router</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-vuex" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-e2e-cypress" target="_blank" rel="noopener">e2e-cypress</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-typescript" target="_blank" rel="noopener">typescript</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
+    <comp-form />
+    <v-btn
+      depressed
+      color="primary"
+      @click="chooseFormType(formEnum.ADDRESS_FORM)"
+    >
+      Dodaj Adres
+    </v-btn>
+    <v-btn @click="chooseFormType(formEnum.STORE_FORM)">Dodaj Sklep</v-btn>
+    <v-btn color="error" @click="chooseFormType(formEnum.NOWY_FORMULARZ)"
+      >Formularz Dupy</v-btn
+    >
   </div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { addressEntity } from "../helpers/interfaces/formInterfaces";
+import Vue from "vue";
+import { storeEntity } from "../helpers/interfaces/formInterfaces";
+import CompForm from "./CompForm.vue";
+import { formEnum } from "../helpers/interfaces/formInterfaces";
 
 export default Vue.extend({
-  name: 'HelloWorld',
+  components: { CompForm },
+  name: "HelloWorld",
   props: {
     msg: String,
+  },
+  data: function() {
+    return {
+      formEnum: formEnum,
+    };
+  },
+  methods: {
+    chooseFormType(choose: any) {
+      //dispatch odnosi sie do akcji
+      this.$store.dispatch("actionFormType", choose);
+    },
   },
 });
 </script>
